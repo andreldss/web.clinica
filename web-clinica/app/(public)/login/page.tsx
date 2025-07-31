@@ -5,17 +5,19 @@ import { useState } from "react";
 import Image from 'next/image'
 import ImgLogo from '@/public/login-image.png'
 import axios from 'axios'
-import { useRouter }  from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export default function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('')
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const router = useRouter()
 
-    const handleLogin = async (e: React.FormEvent) =>{
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
+        setLoading(true)
         setError('')
 
         if (!email || !password) {
@@ -25,6 +27,7 @@ export default function Login() {
 
         try {
             await axios.post('/api/login', { email, password }, { withCredentials: true })
+            setLoading(false)
             router.push('/home')
         } catch (err: any) {
             setError(err.response?.data?.message || 'Erro de conexão')
@@ -41,7 +44,7 @@ export default function Login() {
                 <TextInput placeholder="Senha" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <div className="flex flex-col gap-2 mt-5 items-center">
                     {error && <p className="text-[#6e0e13] font-bold text-center">{error}</p>}
-                    <Button variant="primary" className="w-full" type="submit" >Entrar</Button>
+                    <Button variant="primary" className="flex w-full justify-center" type="submit" >{loading ? <div className="w-6 h-6 border-4 border-emerald-300 border-t-transparent rounded-full animate-spin"></div> : 'Entrar'}</Button>
                 </div>
             </form>
         </div>

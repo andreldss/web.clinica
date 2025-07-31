@@ -15,6 +15,7 @@ export default function Button({
             className={cn(
                 "p-3 text-[#124f14] rounded font-bold whitespace-nowrap hover:opacity-95 disabled:opacity-70 cursor-pointer focus:outline-none",
                 variant === "primary" && "px-4 py-2 bg-[#fffffa] border border-transparent hover:text-content-body active:border-[#97979B]",
+                variant === "secondary" && "px-4 py-2 bg-[#124f14] text-[#fffffa] border border-transparent hover:text-content-body active:border-[#97979B]",
                 props.className
             )}>
             {children}
