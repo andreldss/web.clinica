@@ -1,4 +1,3 @@
-'use client'
 import Calendar from "@/app/components/home/calendar"
 
 export default function Home() {

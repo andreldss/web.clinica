@@ -21,7 +21,7 @@ export async function logIn(email: string, password: string) {
 
   if (!isValid) throw new Error('Senha incorreta.')
 
-  const token = jwt.sign({ userId: user.id, consuktorioId: user.consultorio_id }, JWT_SECRET, { expiresIn: '1h' })
+  const token = jwt.sign({ userId: user.id, consultorioId: user.consultorio_id }, JWT_SECRET, { expiresIn: '1h' })
 
   const cookie = serialize(TOKEN_NAME, token, {
     httpOnly: true,
